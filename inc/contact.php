@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 		);
 		?>
 
-		<?php if ( 'post' == get_post_type('instagrams1') ) : ?>
+		<?php if ( 'post' == get_post_type('contact_us') ) : ?>
 
 			<div class="entry-meta">
 				<?php understrap_posted_on(); ?>

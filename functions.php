@@ -25,6 +25,8 @@ $understrap_includes = array(
 	'/editor.php',                          // Load Editor functions.
 	'/wp-admin.php',                        // /wp-admin/ related functions
 	'/deprecated.php',                      // Load deprecated functions.
+	
+
 );
 
 foreach ( $understrap_includes as $file ) {
