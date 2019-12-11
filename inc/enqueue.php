@@ -31,6 +31,20 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
 		}
+
+		// Get maps marker image dynmaically by searchingg for 'maps-marker'
+		$args = [
+			'post_type' => 'attachment',
+			'name' => sanitize_title('maps-marker'),
+			'posts_per_page' => 1,
+			'post_status' => 'inherit',
+		];
+		$_header = get_posts($args);
+		$header = $_header ? array_pop($_header) : null;
+		$maps_marker = $header ? wp_get_attachment_url($header->ID) : '';
+
+		$translation_array = ['marker_url' => $maps_marker];
+		wp_localize_script('map', 'map_marker', $translation_array);
 	}
 } // endif function_exists( 'understrap_scripts' ).
 

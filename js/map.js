@@ -1,11 +1,11 @@
 google.maps.event.addDomListener(window, 'load', init);
 
-console.log('hello world');
+const marker_url = map_marker.marker_url;
 
 function init() {
     let mapOptions = {
-        zoom: 18,
-        center: new google.maps.LatLng(56.028337981105736, 14.156123312776003),
+        zoom: 15,
+        center: new google.maps.LatLng(55.607058, 13.020996),
         styles: [
             {
                 "featureType": "all",
@@ -175,16 +175,16 @@ function init() {
         ]
     };
     let markerIcon = {
-        url: 'assets/icons/map-marker.png',
+        url: marker_url,
         scaledSize: new google.maps.Size(20, 20),
         size: new google.maps.Size(20, 20),
     }
     let mapElement = document.getElementById('map');
     let map = new google.maps.Map(mapElement, mapOptions);
     let marker = new google.maps.Marker({
-        position: new google.maps.LatLng(56.028337981105736, 14.156123312776003),
+        position: new google.maps.LatLng(55.607058, 13.020996),
         map: map,
-        title: 'BAR•B•KO, Tivoligatan 4',
+        title: 'Medieinstitutet',
         icon: markerIcon,
         optimized: false
     });
