@@ -1,8 +1,8 @@
 google.maps.event.addDomListener(window, 'load', init);
 
-const marker_url = map_marker.marker_url;
 
 function init() {
+	const marker_url = map_marker.marker_url;
     let mapOptions = {
         zoom: 15,
         center: new google.maps.LatLng(55.607058, 13.020996),
