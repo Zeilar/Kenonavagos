@@ -21,29 +21,56 @@ $container = get_theme_mod( 'understrap_container_type' );
 <img src="<?php the_field('frontpage_ad_1'); ?>"></img>
 </div>
 <div class="col-lg-6">
-<img src="<?php the_field('frontpage_ad_1'); ?>"></img>
+<img src="<?php the_field('frontpage_ad_2'); ?>"></img>
 </div>
 </div>
 
-<//?php get_template_part( 'global-templates/sales' ); ?>
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="<?php the_field('frontpage-hero-image-1'); ?>" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="<?php the_field('frontpage-hero-image-2'); ?>" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="<?php the_field('frontpage-hero-image-3'); ?>" alt="Third slide">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 
-<!-- hero -->
+<?php get_template_part( 'global-templates/sales' ); ?>
+
+
 <?php get_template_part( 'global-templates/hero' ); ?>
-<!-- end hero -->
-<!-- men -->
-<?php get_template_part( 'global-templates/men' ); ?>
-<!-- end nen -->
+
+<//?php get_template_part( 'global-templates/men' ); ?>
 
 
 
 
+
+<div class="section-men">
+	<h1>Mens clothing</h1>
 <!-- woocommerce -->
-
 <?php 
 $loop = new WP_Query( array(
     'post_type' => 'product',
     'post_status' => 'publish',
-    'posts_per_page' => 5,
+    'posts_per_page' => 30,
     'product_cat' => 'men,',
 	'orderby' => 'rand'
 	
@@ -59,6 +86,84 @@ wp_reset_postdata();
 ?>
 
 <!-- woocommerece -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-women">
+	<h1>Womens clothing</h1>
+<!-- woocommerce -->
+<?php 
+$loop = new WP_Query( array(
+    'post_type' => 'product',
+    'post_status' => 'publish',
+    'posts_per_page' => 30,
+    'product_cat' => 'women',
+	'orderby' => 'rand'
+	
+) );
+while ($loop->have_posts()) {
+	$loop->the_post();
+	wc_get_template_part('content','product');
+	//var_dump(the_post());
+}
+
+wp_reset_postdata();
+
+?>
+
+<!-- woocommerece -->
+</div>
+
+
+
+<div class="section-kids">
+	<h1>Kids clothing</h1>
+<!-- woocommerce -->
+<?php 
+$loop = new WP_Query( array(
+    'post_type' => 'product',
+    'post_status' => 'publish',
+    'posts_per_page' => 30,
+    'product_cat' => 'kid,',
+	'orderby' => 'rand'
+	
+) );
+while ($loop->have_posts()) {
+	$loop->the_post();
+	wc_get_template_part('content','product');
+	//var_dump(the_post());
+}
+
+wp_reset_postdata();
+
+?>
+
+<!-- woocommerece -->
+</div>
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- page content -->
