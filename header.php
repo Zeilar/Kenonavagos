@@ -42,9 +42,10 @@ $container = get_theme_mod( 'understrap_container_type' );
                     } ?><!-- end custom logo -->
 </div>
 <div class="col-md-4">
+<h6><center>Kenonavagos Fashion</center></h6>
 <?php get_search_form(); ?>
 <hr>
-<h6><center>Kenonavagos Fashion</center></h6>
+
 </div>
 <div class="col-md-4">
 <!-- <button type="button" class="btn btn-primary pull-right">Login</button> -->

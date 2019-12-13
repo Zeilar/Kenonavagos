@@ -2,10 +2,10 @@
 	$logo_id = get_field('logo');
 	$logo = wp_get_attachment_image_src($logo_id, 'large');
 ?>
-<div class="wrapper-men col-md-6">
+<div class="wrapper-men col-md-4">
 	<article class="men">
 		<header>
-			<!-- <?php if ($logo) : ?>
+			<?php if ($logo) : ?>
 				<a href="<?php the_permalink(); ?>">
 					<img src="<?php echo $logo[0]; ?>" class="img-fluid">
 				</a>
@@ -45,7 +45,7 @@
 					    if ($gender = get_field('gender')) {
 						printf(__('<div class="gender">gender: %d</div>', 'understrap'), $gender);
 					    }
-				    ?> -->
+				    ?>
 
 		</footer>
 	</article>

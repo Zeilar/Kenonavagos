@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-// Get the three latest Dogs post
+// Get the three latest men post
 $men= new WP_Query([
 	'post_type' => 'men_keno',
 	'posts_per_page' => 3 ,
