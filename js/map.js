@@ -192,7 +192,22 @@ function init() {
 			name: 'Drottninggatan 4',
 			lat: 55.607058,
 			lng: 13.020996,
-		}
+		},
+		{
+			name: 'Kungliga slottet',
+			lat: 59.3268215,
+			lng: 18.0717194,
+		},
+		{
+			name: 'New York City',
+			lat: 40.6976637,
+			lng: -74.119764,
+		},
+		{
+			name: 'Pitcairn Islands',
+			lat: -24.4786052,
+			lng: -128.8550564,
+		},
 	];
 
 	for (let i = 0; i < locations.length; i++) {
