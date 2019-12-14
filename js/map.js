@@ -182,6 +182,7 @@ function init() {
     const map = new google.maps.Map(mapElement, mapOptions);
 	const infoWindow = new google.maps.InfoWindow();
 
+	// locations for the markers
 	const locations = [
 		{
 			name: 'Kommendantsvägen 10',
@@ -210,6 +211,7 @@ function init() {
 		},
 	];
 
+	// add markers
 	for (let i = 0; i < locations.length; i++) {
 		let marker = new google.maps.Marker({
 			position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
@@ -227,6 +229,7 @@ function init() {
       	})(marker, i));
 	}
 
+	// if user accepts geolocation, center map on their position
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position) {
 			let pos = {
@@ -235,7 +238,5 @@ function init() {
 			};
 			map.setCenter(pos);
 		});
-	} else {
-		
 	}
 }
