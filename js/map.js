@@ -1,6 +1,5 @@
 google.maps.event.addDomListener(window, 'load', init);
 
-
 function init() {
 	const marker_url = map_marker.marker_url;
     let mapOptions = {
@@ -193,4 +192,17 @@ function init() {
         this.getPanes().markerLayer.id = 'markerLayer';
     };
     myoverlay.setMap(map);
+
+	if (navigator.geolocation) {
+		console.log(navigator.geolocation);
+		navigator.geolocation.getCurrentPosition(function(position) {
+			let pos = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			};
+			map.setCenter(pos);
+		});
+	} else {
+		
+	}
 }
