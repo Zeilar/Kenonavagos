@@ -3,7 +3,7 @@ google.maps.event.addDomListener(window, 'load', init);
 function init() {
 	const marker_url = map_marker.marker_url;
     let mapOptions = {
-        zoom: 15,
+        zoom: 8,
         center: new google.maps.LatLng(55.607058, 13.020996),
         styles: [
             {
@@ -173,28 +173,46 @@ function init() {
             }
         ]
     };
-    let markerIcon = {
+    const markerIcon = {
         url: marker_url,
         scaledSize: new google.maps.Size(20, 20),
         size: new google.maps.Size(20, 20),
     }
-    let mapElement = document.getElementById('map');
-    let map = new google.maps.Map(mapElement, mapOptions);
-    let marker = new google.maps.Marker({
-        position: new google.maps.LatLng(55.607058, 13.020996),
-        map: map,
-        title: 'Medieinstitutet',
-        icon: markerIcon,
-        optimized: false
-    });
-    let myoverlay = new google.maps.OverlayView();
-    myoverlay.draw = function() {
-        this.getPanes().markerLayer.id = 'markerLayer';
-    };
-    myoverlay.setMap(map);
+    const mapElement = document.getElementById('map');
+    const map = new google.maps.Map(mapElement, mapOptions);
+	const infoWindow = new google.maps.InfoWindow();
+
+	const locations = [
+		{
+			name: 'Kommendantsvägen 10',
+			lat: 56.050794, 
+			lng: 14.156656,
+		},
+		{
+			name: 'Drottninggatan 4',
+			lat: 55.607058,
+			lng: 13.020996,
+		}
+	];
+
+	for (let i = 0; i < locations.length; i++) {
+		let marker = new google.maps.Marker({
+			position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
+			title: locations[i].name,
+			optimized: false,
+			icon: markerIcon,
+			map: map,
+		});
+
+		google.maps.event.addListener(marker, 'click', (function(marker, i) {
+			return function() {
+				infoWindow.setContent(locations[i].name);
+				infoWindow.open(map, marker);
+			}
+      	})(marker, i));
+	}
 
 	if (navigator.geolocation) {
-		console.log(navigator.geolocation);
 		navigator.geolocation.getCurrentPosition(function(position) {
 			let pos = {
 				lat: position.coords.latitude,
