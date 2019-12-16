@@ -28,7 +28,7 @@ $understrap_includes = array(
 );
 
 /**
- * Register Custom Navigation Walker
+ * Register Custom Navigation Walker (Philip)
  */
 function register_navwalker() {
 	require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';

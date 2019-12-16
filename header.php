@@ -58,7 +58,7 @@ $container = get_theme_mod( 'understrap_container_type' );
 					<span class="navbar-toggler-icon"></span>
 				</button>
 
-				<!-- The WordPress Menu goes here -->
+				<!-- The WordPress Menu goes here (Philip) -->
 				<?php wp_nav_menu(
 					[
 						'theme_location'  => 'primary',
