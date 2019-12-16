@@ -1,12 +1,12 @@
 // Philip
 
-google.maps.event.addDomListener(window, 'load', init);
+google.maps.event.addDomListener(window, 'load', init); // run init() at window load event
 
 function init() {
 	const marker_url = map_marker.marker_url;
-    let mapOptions = {
+    const mapOptions = {
         zoom: 8,
-        center: new google.maps.LatLng(55.607058, 13.020996),
+        center: new google.maps.LatLng(55.607058, 13.020996), // default center point in case geolocation is turned off
         styles: [
             {
                 "featureType": "all",
@@ -175,6 +175,7 @@ function init() {
             }
         ]
     };
+
     const markerIcon = {
         url: marker_url,
         scaledSize: new google.maps.Size(20, 20),
@@ -223,6 +224,7 @@ function init() {
 			map: map,
 		});
 
+		// add click event listener for every marker
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			return function() {
 				infoWindow.setContent(locations[i].name);
