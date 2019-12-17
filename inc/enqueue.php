@@ -19,10 +19,10 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 
 		$css_version = $theme_version . '.' . filemtime( get_template_directory() . '/css/theme.min.css' );
 		wp_enqueue_style('understrap-styles', get_template_directory_uri() . '/css/theme.min.css', [], $css_version);
-		wp_enqueue_style('page-outlets', get_template_directory_uri() . '/css/page-outlets.css', [], null, 'all');
-		wp_enqueue_style('map', get_template_directory_uri() . '/css/map.css', [], null, 'all'); // Philip
+		wp_enqueue_style('page-outlets', get_template_directory_uri() . '/css/page-outlets.css', [], null, 'all'); // Philip
 
 		$js_version = $theme_version . '.' . filemtime( get_template_directory() . '/js/theme.min.js' );
+		wp_deregister_script( 'jquery' ); // upgrade jQuery, a bit risky (Philip)
 		wp_enqueue_script('google-maps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBEuVhVxxRtJXEbALnA3BOgXwpps1it_ZI', [], null, true); // Philip
 		wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.4.1.js', [], '3.4.1', true); // Philip
 		wp_enqueue_script('map', get_template_directory_uri() . '/js/map.js', [], null, true);
@@ -34,17 +34,17 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 
 		// Get map marker image dynmaically by searching for 'maps-marker' (Philip)
 		$args = [
-			'name' => sanitize_title('maps-marker'),
+			'name' => sanitize_title('map-marker'),
 			'post_type' => 'attachment',
 			'post_status' => 'inherit',
 			'posts_per_page' => 1,
 		];
 		$_header = get_posts($args);
 		$header = $_header ? array_pop($_header) : null;
-		$maps_marker = $header ? wp_get_attachment_url($header->ID) : '';
+		$map_marker = $header ? wp_get_attachment_url($header->ID) : '';
 
 		wp_localize_script('map', 'map_marker', [
-			'marker_url' => $maps_marker,
+			'marker_url' => $map_marker,
 		]);
 	}
 } // endif function_exists( 'understrap_scripts' ).

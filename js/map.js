@@ -5,6 +5,9 @@ google.maps.event.addDomListener(window, 'load', init); // run init() at window 
 function init() {
 	const marker_url = map_marker.marker_url;
     const mapOptions = {
+		fullscreenControl: false,
+		rotateControl: false,
+		scaleControl: false,
         zoom: 8,
         center: new google.maps.LatLng(55.607058, 13.020996), // default center point in case geolocation is turned off
         styles: [
