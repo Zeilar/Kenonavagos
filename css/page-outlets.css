@@ -16,6 +16,10 @@
 	display: none;
 }
 
+.gm-svpc {
+	display: none;
+}
+
 @media (max-width: 1200px) {
 	.outlets-header {
 		font-size: 25px;
