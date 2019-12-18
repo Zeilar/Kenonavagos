@@ -27,6 +27,14 @@ $understrap_includes = array(
 	'/deprecated.php',                      // Load deprecated functions.
 );
 
+/**
+ * Register Custom Navigation Walker (Philip)
+ */
+function register_navwalker() {
+	require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
+}
+add_action('after_setup_theme', 'register_navwalker');
+
 foreach ( $understrap_includes as $file ) {
 	$filepath = locate_template( 'inc' . $file );
 	if ( ! $filepath ) {
@@ -34,3 +42,18 @@ foreach ( $understrap_includes as $file ) {
 	}
 	require_once $filepath;
 }
+
+
+ function arphabet_widgets_init() {
+    
+        register_sidebar( array(
+            'name'          => 'Home Left sidebar',
+            'id'            => 'home_right_1',
+            'before_widget' => '<div>',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h2 class="rounded">',
+            'after_title'   => '</h2>',
+        ) );
+    
+    }
+ add_action( 'widgets_init', 'arphabet_widgets_init' );

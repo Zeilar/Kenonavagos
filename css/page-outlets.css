@@ -1,0 +1,32 @@
+/* Philip */
+
+.outlets-header {
+	background: black;
+	text-align: center;
+	color: white;
+	padding: 20px;
+	margin: 0;
+}
+
+#map {
+	height: 50vh;
+}
+
+.gm-style-cc {
+	display: none;
+}
+
+.gm-svpc {
+	display: none;
+}
+
+@media (max-width: 1200px) {
+	.outlets-header {
+		font-size: 25px;
+		padding: 10px;
+	}
+
+	.gmnoprint {
+		display: none;
+	}
+}
