@@ -260,7 +260,7 @@ function init() {
 
 		// create .outlets HTML
 		outletsHTML += `
-			<button class="outlet" data-location="${locations[i].lat}, ${locations[i].lng}">
+			<button class="outlet" data-lat="${locations[i].lat}" data-lng="${locations[i].lng}">
 				<span class="outlet-text">${locations[i].name}</span>
 				<img class="outlet-arrow" src="https://i.imgur.com/hhZai5a.png" />
 			</button>
@@ -270,6 +270,14 @@ function init() {
 
 	// fill .outlets with the buttons
 	$('.outlets').html(outletsHTML);
+
+	// change center to clicked location
+	$('.outlet').click(function() {
+		map.setCenter({
+			lat: parseFloat($(this).attr('data-lat')),
+			lng: parseFloat($(this).attr('data-lng')),
+		});
+	});
 
 	// if user accepts geolocation, center map on their position
 	if (navigator.geolocation) {
