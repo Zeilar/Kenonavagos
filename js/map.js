@@ -6,6 +6,7 @@ function init() {
 	const marker_url = map_marker.marker_url;
     const mapOptions = {
 		fullscreenControl: false,
+		mapTypeControl: false,
 		rotateControl: false,
 		scaleControl: false,
         zoom: 8,
@@ -215,7 +216,19 @@ function init() {
 			lat: -24.4786052,
 			lng: -128.8550564,
 		},
+		{
+			name: 'North Pole',
+			lat: 84.9999726,
+			lng: -135.0006867,
+		},
+		{
+			name: 'Mount Everest',
+			lat: 27.9881388,
+			lng: 86.9162203,
+		},
 	];
+
+	let outletsHTML = '';
 
 	// add markers
 	for (let i = 0; i < locations.length; i++) {
@@ -234,7 +247,19 @@ function init() {
 				infoWindow.open(map, marker);
 			}
       	})(marker, i));
+
+		// create .outlets HTML
+		outletsHTML += `
+			<button class="outlet" data-location="${locations[i].lat}, ${locations[i].lng}">
+				<span class="outlet-text">${locations[i].name}</span>
+				<img class="outlet-arrow" src="https://i.imgur.com/hhZai5a.png" />
+			</button>
+			<hr class="outlet-hr" />
+		`;
 	}
+
+	// fill .outlets with the buttons
+	$('.outlets').html(outletsHTML);
 
 	// if user accepts geolocation, center map on their position
 	if (navigator.geolocation) {
