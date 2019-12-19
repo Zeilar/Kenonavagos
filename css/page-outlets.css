@@ -64,18 +64,17 @@
 	margin-top: 10px;
 }
 
-
 .outlet:focus {
 	outline: 0;
 }
 
-.outlet-text {
+.outlet-text, .outlet-arrow {
 	align-self: center;
 }
 
 .outlet-hr {
 	border-color: black;
-	margin: 0 5% 30px 5%;
+	margin: 0 5% 15px 5%;
 	width: 90%;
 }
 
@@ -97,12 +96,22 @@
 }
 
 @media (max-width: 1200px) {
+	.outlets {
+		display: none;
+	}
+
 	.outlets-header {
 		font-size: 25px;
 	}
 
+	.outlets-selection {
+		flex: none;
+	}
+
 	.map-wrapper {
+		flex-direction: column;
 		height: 50vh;
+		border: 0;
 	}
 
 	.gmnoprint {

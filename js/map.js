@@ -226,6 +226,16 @@ function init() {
 			lat: 27.9881388,
 			lng: 86.9162203,
 		},
+		{
+			name: 'The Black Sea',
+			lat: 46.8933231,
+			lng: 9.3275701,
+		},
+		{
+			name: 'IKEA Älmhult',
+			lat: 56.5356848,
+			lng: 14.1227405,
+		},
 	];
 
 	let outletsHTML = '';
