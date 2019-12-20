@@ -43,8 +43,9 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 		$header = $_header ? array_pop($_header) : null;
 		$map_marker = $header ? wp_get_attachment_url($header->ID) : '';
 
-		wp_localize_script('map', 'map_marker', [
-			'marker_url' => $map_marker,
+		wp_localize_script('map', 'map_settings', [
+			'marker_image' => $map_marker,
+			'markers' => get_option('kn_markers'),
 		]);
 	}
 } // endif function_exists( 'understrap_scripts' ).

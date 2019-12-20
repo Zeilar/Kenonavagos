@@ -3,7 +3,8 @@
 google.maps.event.addDomListener(window, 'load', init); // run init() at window load event
 
 function init() {
-	const marker_url = map_marker.marker_url;
+	const marker_path = map_settings.marker_image;
+	const markers = map_settings.markers;
     const mapOptions = {
 		fullscreenControl: false,
 		mapTypeControl: false,
@@ -181,70 +182,21 @@ function init() {
     };
 
     const markerIcon = {
-        url: marker_url,
         scaledSize: new google.maps.Size(20, 20),
         size: new google.maps.Size(20, 20),
+        url: marker_path,
     }
     const mapElement = document.getElementById('map');
     const map = new google.maps.Map(mapElement, mapOptions);
 	const infoWindow = new google.maps.InfoWindow();
 
-	// locations for the markers
-	const locations = [
-		{
-			name: 'Kommendantsvägen 10',
-			lat: 56.050794, 
-			lng: 14.156656,
-		},
-		{
-			name: 'Drottninggatan 4',
-			lat: 55.607058,
-			lng: 13.020996,
-		},
-		{
-			name: 'Kungliga slottet',
-			lat: 59.3268215,
-			lng: 18.0717194,
-		},
-		{
-			name: 'New York City',
-			lat: 40.6976637,
-			lng: -74.119764,
-		},
-		{
-			name: 'Pitcairn Islands',
-			lat: -24.4786052,
-			lng: -128.8550564,
-		},
-		{
-			name: 'North Pole',
-			lat: 84.9999726,
-			lng: -135.0006867,
-		},
-		{
-			name: 'Mount Everest',
-			lat: 27.9881388,
-			lng: 86.9162203,
-		},
-		{
-			name: 'The Black Sea',
-			lat: 46.8933231,
-			lng: 9.3275701,
-		},
-		{
-			name: 'IKEA Älmhult',
-			lat: 56.5356848,
-			lng: 14.1227405,
-		},
-	];
-
-	let outletsHTML = '';
 
 	// add markers
-	for (let i = 0; i < locations.length; i++) {
+	let outletsHTML = '';
+	for (let i = 0; i < markers.length; i++) {
 		let marker = new google.maps.Marker({
-			position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
-			title: locations[i].name,
+			position: new google.maps.LatLng(markers[i].lat, markers[i].lng),
+			title: markers[i].name,
 			optimized: false,
 			icon: markerIcon,
 			map: map,
@@ -253,21 +205,20 @@ function init() {
 		// add click event listener for every marker
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			return function() {
-				infoWindow.setContent(locations[i].name);
+				infoWindow.setContent(markers[i].name);
 				infoWindow.open(map, marker);
 			}
       	})(marker, i));
 
 		// create .outlets HTML
 		outletsHTML += `
-			<button class="outlet" data-lat="${locations[i].lat}" data-lng="${locations[i].lng}">
-				<span class="outlet-text">${locations[i].name}</span>
+			<button class="outlet" data-lat="${markers[i].lat}" data-lng="${markers[i].lng}">
+				<span class="outlet-text">${markers[i].name}</span>
 				<img class="outlet-arrow" src="https://i.imgur.com/hhZai5a.png" />
 			</button>
 			<hr class="outlet-hr" />
 		`;
 	}
-
 	// fill .outlets with the buttons
 	$('.outlets').html(outletsHTML);
 
