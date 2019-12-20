@@ -1,7 +1,7 @@
 
 <?php
 /**
- * The template for displaying the front page.
+ * The template for displaying the front page. Home in wp dashboard.
  *
  * @package understrap
  */
@@ -33,13 +33,13 @@ $container = get_theme_mod( 'understrap_container_type' );
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="d-block w-100" src="<?php the_field('frontpage_hero_1'); ?>" alt="First slide">
+      <img class="d-block w-100" src="<?php the_field('frontpage_hero_1'); ?>">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="<?php the_field('frontpage_hero_2'); ?>" alt="Second slide">
+      <img class="d-block w-100" src="<?php the_field('frontpage_hero_2'); ?>">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="<?php the_field('frontpage_hero_3'); ?>" alt="Third slide">
+      <img class="d-block w-100" src="<?php the_field('frontpage_hero_3'); ?>">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
