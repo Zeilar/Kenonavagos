@@ -4,7 +4,11 @@ google.maps.event.addDomListener(window, 'load', init); // run init() at window 
 
 function init() {
 	const marker_path = map_settings.marker_image;
-	const markers = map_settings.markers;
+	const markers = map_settings.markers ? map_settings.markers : {
+		name: 'Drottninggatan 4',
+		lat: 55.607058,
+		lng: 13.020996,
+	};
     const mapOptions = {
 		fullscreenControl: false,
 		mapTypeControl: false,
