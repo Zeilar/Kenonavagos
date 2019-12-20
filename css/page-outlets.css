@@ -1,15 +1,90 @@
 /* Philip */
 
-.outlets-header {
+.map-wrapper {
+	flex-direction: row;
+	display: flex;
+	height: 50vh;
+}
+
+.outlets-selection {
+	border-bottom: 1px solid black;
+	flex: 2;
+}
+
+.outlets::-webkit-scrollbar {
+	width: 15px;
+}
+
+.outlets::-webkit-scrollbar-track {
+	background: none;
+}
+
+.outlets::-webkit-scrollbar-thumb {
+	background: rgb(75, 75, 75);
+}
+
+.outlets-header-wrapper {
 	background: black;
+	position: relative;
+	height: 7vh;
+}
+
+.outlets-header {
+	transform: translate(-50%, -50%);
 	text-align: center;
+	position: absolute;
+	width: fit-content;
+	font-size: 35px;
 	color: white;
-	padding: 20px;
 	margin: 0;
+	left: 50%;
+	top: 50%;
+}
+
+.outlets {
+	border-left: 1px solid black;
+	flex-direction: column;
+	overflow-y: auto;
+	display: flex;
+	height: 43vh;
+}
+
+.outlet {
+	padding: 0;
+	border: 0;
+	margin: 0;
+    justify-content: space-between;
+    flex-direction: row;
+	background: none;
+	padding: 5px 5%;
+    display: flex;
+}
+
+.outlet:first-child {
+	margin-top: 10px;
+}
+
+.outlet:focus {
+	outline: 0;
+}
+
+.outlet-text, .outlet-arrow {
+	align-self: center;
+}
+
+.outlet-hr {
+	border-color: black;
+	margin: 0 5% 15px 5%;
+	width: 90%;
+}
+
+.outlet-hr:last-child {
+	margin-bottom: 10px;
 }
 
 #map {
-	height: 50vh;
+	height: 100%;
+	flex: 5;
 }
 
 .gm-style-cc {
@@ -21,9 +96,22 @@
 }
 
 @media (max-width: 1200px) {
+	.outlets {
+		display: none;
+	}
+
 	.outlets-header {
 		font-size: 25px;
-		padding: 10px;
+	}
+
+	.outlets-selection {
+		flex: none;
+	}
+
+	.map-wrapper {
+		flex-direction: column;
+		height: 50vh;
+		border: 0;
 	}
 
 	.gmnoprint {
