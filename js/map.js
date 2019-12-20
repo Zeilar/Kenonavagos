@@ -9,12 +9,23 @@ function init() {
 		lat: 55.607058,
 		lng: 13.020996,
 	};
-    const mapOptions = {
+	const zoom = parseFloat(map_settings.zoom ? map_settings.zoom : 8);
+	const controls = map_settings.controls ? map_settings.controls : {
 		fullscreenControl: false,
+		streetViewControl: false,
 		mapTypeControl: false,
 		rotateControl: false,
 		scaleControl: false,
-        zoom: 8,
+		zoomControl: true,
+	};
+    const mapOptions = {
+		fullscreenControl: controls.fullscreenControl,
+		streetViewControl: controls.streetViewControl,
+		mapTypeControl: controls.mapTypeControl,
+		rotateControl: controls.rotateControl,
+		scaleControl: controls.scaleControl,
+		zoomControl: controls.zoomControl,
+        zoom: zoom,
         center: new google.maps.LatLng(55.607058, 13.020996), // default center point in case geolocation is turned off
         styles: [
             {
