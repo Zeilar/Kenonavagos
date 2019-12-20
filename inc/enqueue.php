@@ -43,9 +43,21 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 		$header = $_header ? array_pop($_header) : null;
 		$map_marker = $header ? wp_get_attachment_url($header->ID) : '';
 
+		// map controls settings from plugin
+		$map_controls = [
+			'zoomControl' => get_option('kn_controls')['zoomControl'] ? true : false,
+			'mapTypeControl' => get_option('kn_controls')['mapTypeControl'] ? true : false,
+			'scaleControl' => get_option('kn_controls')['scaleControl'] ? true : false,
+			'streetViewControl' => get_option('kn_controls')['streetViewControl'] ? true : false,
+			'rotateControl' => get_option('kn_controls')['rotateControl'] ? true : false,
+			'fullscreenControl' => get_option('kn_controls')['fullscreenControl'] ? true : false,
+		];
+
 		wp_localize_script('map', 'map_settings', [
-			'marker_image' => $map_marker,
 			'markers' => get_option('kn_markers'),
+			'zoom' => get_option('kn_zoom'),
+			'marker_image' => $map_marker,
+			'controls' => $map_controls,
 		]);
 	}
 } // endif function_exists( 'understrap_scripts' ).
