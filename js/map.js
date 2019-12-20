@@ -5,6 +5,7 @@ google.maps.event.addDomListener(window, 'load', init); // run init() at window 
 function init() {
 	const marker_path = map_settings.marker_image;
 	const markers = map_settings.markers ? map_settings.markers : {
+		content: 'Medieinstitutet AB',
 		name: 'Drottninggatan 4',
 		lat: 55.607058,
 		lng: 13.020996,
@@ -205,7 +206,6 @@ function init() {
     const map = new google.maps.Map(mapElement, mapOptions);
 	const infoWindow = new google.maps.InfoWindow();
 
-
 	// add markers
 	let outletsHTML = '';
 	for (let i = 0; i < markers.length; i++) {
@@ -217,10 +217,19 @@ function init() {
 			map: map,
 		});
 
+		// custom marker info window content
+		let markerContent = markers[i].content ? `<p class="marker-content">${markers[i].content}</p>` : '';
+		let markerHTML = `
+			<div class="marker-wrapper">
+				<h6 class="marker-header">${markers[i].name}</h6>
+				${markerContent}
+			</div>
+		`;
+
 		// add click event listener for every marker
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			return function() {
-				infoWindow.setContent(markers[i].name);
+				infoWindow.setContent(markerHTML);
 				infoWindow.open(map, marker);
 			}
       	})(marker, i));

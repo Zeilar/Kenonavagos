@@ -43,6 +43,7 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 		$header = $_header ? array_pop($_header) : null;
 		$map_marker = $header ? wp_get_attachment_url($header->ID) : '';
 
+		// map controls settings from plugin
 		$map_controls = [
 			'zoomControl' => get_option('kn_controls')['zoomControl'] ? true : false,
 			'mapTypeControl' => get_option('kn_controls')['mapTypeControl'] ? true : false,
@@ -53,10 +54,10 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 		];
 
 		wp_localize_script('map', 'map_settings', [
-			'marker_image' => $map_marker,
 			'markers' => get_option('kn_markers'),
-			'controls' => $map_controls,
 			'zoom' => get_option('kn_zoom'),
+			'marker_image' => $map_marker,
+			'controls' => $map_controls,
 		]);
 	}
 } // endif function_exists( 'understrap_scripts' ).
