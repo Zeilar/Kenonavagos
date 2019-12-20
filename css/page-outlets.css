@@ -87,6 +87,14 @@
 	flex: 5;
 }
 
+.marker-header {
+	margin: 0;
+}
+
+.marker-content {
+	margin: 10px 0 5px 0;
+}
+
 .gm-style-cc {
 	display: none;
 }
