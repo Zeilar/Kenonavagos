@@ -49,8 +49,8 @@ function init() {
         zoom: zoom,
     };
     const markerIcon = {
-        scaledSize: new google.maps.Size(20, 20),
-        size: new google.maps.Size(20, 20),
+        scaledSize: new google.maps.Size(25, 25),
+        size: new google.maps.Size(25, 25),
         url: marker_path,
     }
     const mapElement = document.getElementById('map');
@@ -58,6 +58,7 @@ function init() {
 	const infoWindow = new google.maps.InfoWindow();
 
 	// add markers
+	let markersArray = [];
 	let outletsHTML = '';
 	for (let i = 0; i < markers.length; i++) {
 		let marker = new google.maps.Marker({
@@ -67,6 +68,7 @@ function init() {
 			icon: markerIcon,
 			map: map,
 		});
+		markersArray.push(marker);
 
 		// custom marker info window content
 		let markerContent = markers[i].content ? `<p class="marker-content">${markers[i].content}</p>` : '';
@@ -82,6 +84,10 @@ function init() {
 			return function() {
 				infoWindow.setContent(markerHTML);
 				infoWindow.open(map, marker);
+				map.setCenter({
+					lat: parseFloat(markers[i].lat),
+					lng: parseFloat(markers[i].lng),
+				});
 			}
       	})(marker, i));
 
@@ -96,6 +102,23 @@ function init() {
 	}
 	// fill .outlets with the buttons
 	$('.outlets').html(outletsHTML);
+	
+	$('.outlet').each(function(i) {
+		let markerContent = markers[i].content ? `<p class="marker-content">${markers[i].content}</p>` : '';
+		let markerHTML = `
+			<div class="marker-wrapper">
+				<h6 class="marker-header">${markers[i].name}</h6>
+				${markerContent}
+			</div>
+		`;
+		$(this).click(function() {
+			infoWindow.setContent(markerHTML);
+			infoWindow.open(map, markersArray[i]);
+			map.setZoom(11);
+		});
+	});
+
+	//infoWindow.open(map, test[0]);
 
 	// change center to clicked location
 	$('.outlet').click(function() {
