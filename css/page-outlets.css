@@ -8,6 +8,8 @@
 }
 
 .outlets-selection {
+	flex-direction: column;
+	display: flex;
 	flex: 2;
 }
 
@@ -46,7 +48,6 @@
 	flex-direction: column;
 	overflow-y: auto;
 	display: flex;
-	height: 42.6vh;
 }
 
 .outlet {
