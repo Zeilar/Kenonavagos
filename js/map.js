@@ -122,7 +122,7 @@ function init() {
 
 	// change center to clicked location
 	$('.outlet').click(function() {
-		map.setCenter({
+		map.panTo({
 			lat: parseFloat($(this).attr('data-lat')),
 			lng: parseFloat($(this).attr('data-lng')),
 		});
@@ -131,11 +131,10 @@ function init() {
 	// if user accepts geolocation, center map on their position
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position) {
-			let pos = {
+			map.panTo({
 				lat: position.coords.latitude,
 				lng: position.coords.longitude
-			};
-			map.setCenter(pos);
+			});
 		});
 	}
 }
