@@ -84,7 +84,7 @@ function init() {
 			return function() {
 				infoWindow.setContent(markerHTML);
 				infoWindow.open(map, marker);
-				map.setCenter({
+				map.panTo({
 					lat: parseFloat(markers[i].lat),
 					lng: parseFloat(markers[i].lng),
 				});
