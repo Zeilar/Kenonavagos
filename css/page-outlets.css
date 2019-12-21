@@ -42,10 +42,11 @@
 }
 
 .outlets {
+	border-right: 2px solid black;
 	flex-direction: column;
 	overflow-y: auto;
 	display: flex;
-	height: calc(43vh - 3px);
+	height: 42.6vh;
 }
 
 .outlet {
