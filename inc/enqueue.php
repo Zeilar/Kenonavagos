@@ -55,6 +55,7 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 
 		wp_localize_script('map', 'map_settings', [
 			'markers' => get_option('kn_markers'),
+			'theme' => get_option('kn_theme'),
 			'zoom' => get_option('kn_zoom'),
 			'marker_image' => $map_marker,
 			'controls' => $map_controls,
