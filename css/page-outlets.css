@@ -1,13 +1,13 @@
 /* Philip */
 
 .map-wrapper {
+	border: 2px solid black;
 	flex-direction: row;
 	display: flex;
 	height: 50vh;
 }
 
 .outlets-selection {
-	border-bottom: 1px solid black;
 	flex: 2;
 }
 
@@ -42,11 +42,10 @@
 }
 
 .outlets {
-	border-left: 1px solid black;
 	flex-direction: column;
 	overflow-y: auto;
 	display: flex;
-	height: 43vh;
+	height: calc(43vh - 3px);
 }
 
 .outlet {
@@ -119,7 +118,6 @@
 	.map-wrapper {
 		flex-direction: column;
 		height: 50vh;
-		border: 0;
 	}
 
 	.gmnoprint {
