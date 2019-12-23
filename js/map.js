@@ -14,11 +14,15 @@ function init() {
 
 	// search for selected theme in the saved themes object
 	let theme = map_settings.theme;
-	for (themes in mapThemes) {
-		if (theme === themes) {
-			theme = mapThemes[themes];
-			break;
-		} 
+	if (typeof theme !== 'string') {
+		for (themes in mapThemes) {
+			if (theme === themes) {
+				theme = mapThemes[themes];
+				break;
+			}
+		}
+	} else {
+		theme = JSON.parse(theme);
 	}
 
 	const marker_path = map_settings.marker_image;
