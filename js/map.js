@@ -22,7 +22,11 @@ function init() {
 			}
 		}
 	} else {
-		theme = JSON.parse(theme);
+		try {
+			theme = JSON.parse(theme);
+		} catch (e) {
+			console.log(e + '\n\nIf you get this error you have likely insserted an invalid style array, check the input and try again');
+		}
 	}
 
 	const marker_path = map_settings.marker_image;
