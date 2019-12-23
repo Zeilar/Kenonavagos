@@ -21,15 +21,15 @@ function init() {
 		} 
 	}
 
-	const marker_path = map_settings.marker_image; // path to marker image
+	const marker_path = map_settings.marker_image;
 	const markers = map_settings.markers ? map_settings.markers : {
 		content: 'Medieinstitutet AB',
 		name: 'Drottninggatan 4',
 		lat: 55.607058,
 		lng: 13.020996,
 	};
-	const zoom = parseFloat(map_settings.zoom ? map_settings.zoom : 6); // zoom of the map
-	const controls = map_settings.controls ? map_settings.controls : { // enable/disable map controls
+	const zoom = parseFloat(map_settings.zoom ? map_settings.zoom : 6);
+	const controls = map_settings.controls ? map_settings.controls : {
 		fullscreenControl: false,
 		streetViewControl: false,
 		mapTypeControl: false,
