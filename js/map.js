@@ -1,8 +1,8 @@
 // Philip
 
-google.maps.event.addDomListener(window, 'load', init); // run init() at window load event
+if ($('#map').length) google.maps.event.addDomListener(window, 'load', map_init); // only load map if #map exists 
 
-function init() {
+function map_init() {
 	// hard saved themes
 	let mapThemes = {
 		Default: null,
