@@ -14,14 +14,15 @@ function init() {
 
 	// search for selected theme in the saved themes object
 	let theme = map_settings.theme;
-	if (typeof theme !== 'string') {
-		for (themes in mapThemes) {
-			if (theme === themes) {
-				theme = mapThemes[themes];
-				break;
-			}
+	for (themes in mapThemes) {
+		if (theme === themes) {
+			theme = mapThemes[themes];
+			break;
 		}
-	} else {
+	}
+	
+	// if no match was found, it probably means it's the custom option, try parsing it...
+	if (typeof theme === 'string') {
 		try {
 			theme = JSON.parse(theme);
 		} catch (e) {
