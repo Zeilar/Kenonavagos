@@ -16,6 +16,8 @@
 
 	<?php endif; ?>
 
-	<div id="map"><!-- Google Maps --></div>
+	<div id="map" <?php if (get_option('kn_css') && get_option('kn_css') !== '') echo 'style="' . get_option('kn_css') . '"'; ?> >
+		<!-- Google Maps -->
+	</div>
 	
 </div><!-- map-wrapper -->
