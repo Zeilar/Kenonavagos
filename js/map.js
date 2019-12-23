@@ -20,7 +20,7 @@ function init() {
 			break;
 		}
 	}
-	
+
 	// if no match was found, it probably means it's the custom option, try parsing it...
 	if (typeof theme === 'string') {
 		try {
@@ -30,6 +30,7 @@ function init() {
 		}
 	}
 
+	const locations_list = map_settings.locations ? true : false;
 	const marker_path = map_settings.marker_image;
 	const markers = map_settings.markers ? map_settings.markers : {
 		content: 'Medieinstitutet AB',
@@ -109,33 +110,35 @@ function init() {
 			<hr class="outlet-hr" />
 		`;
 	}
-	// fill .outlets with the buttons
-	$('.outlets').html(outletsHTML);
-	
-	$('.outlet').each(function(i) {
-		let markerContent = markers[i].content ? `<p class="marker-content">${markers[i].content}</p>` : '';
-		let markerHTML = `
-			<div class="marker-wrapper">
-				<h6 class="marker-header">${markers[i].name}</h6>
-				${markerContent}
-			</div>
-		`;
-		$(this).click(function() {
-			infoWindow.setContent(markerHTML);
-			infoWindow.open(map, markersArray[i]);
-			map.setZoom(11);
-		});
-	});
 
-	//infoWindow.open(map, test[0]);
-
-	// change center to clicked location
-	$('.outlet').click(function() {
-		map.panTo({
-			lat: parseFloat($(this).attr('data-lat')),
-			lng: parseFloat($(this).attr('data-lng')),
+	if (locations_list) {
+		// fill .outlets with the buttons
+		$('.outlets').html(outletsHTML);
+		
+		// add marker event handlers and content
+		$('.outlet').each(function(i) {
+			let markerContent = markers[i].content ? `<p class="marker-content">${markers[i].content}</p>` : '';
+			let markerHTML = `
+				<div class="marker-wrapper">
+					<h6 class="marker-header">${markers[i].name}</h6>
+					${markerContent}
+				</div>
+			`;
+			$(this).click(function() {
+				infoWindow.setContent(markerHTML);
+				infoWindow.open(map, markersArray[i]);
+				map.setZoom(11);
+			});
 		});
-	});
+
+		// change center to clicked location
+		$('.outlet').click(function() {
+			map.panTo({
+				lat: parseFloat($(this).attr('data-lat')),
+				lng: parseFloat($(this).attr('data-lng')),
+			});
+		});
+	}
 
 	// if user accepts geolocation, center map on their position
 	if (navigator.geolocation) {
