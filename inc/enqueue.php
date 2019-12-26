@@ -30,6 +30,27 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 		if (is_singular() && comments_open() && get_option('thread_comments')) {
 			wp_enqueue_script('comment-reply');
 		}
+
+		// Get markers
+		$results = new WP_Query([
+			'post_type' => 'kn_marker',
+			'posts_per_page' => -1,
+			'order' => 'ASC'
+		]);
+
+		// Push markers into array
+		$markers = [];
+		while ($results->have_posts()) {
+			$results->the_post();
+			array_push($markers, [
+				'content' => apply_filters('the_content', get_the_content()), // To remove stupid HTML comments by WordPress
+				'icon' => get_field('icon')['url'],
+				'lng' => get_field('longitude'),
+				'lat' => get_field('latitude'),
+				'name' => get_the_title(),
+			]);
+		}
+		wp_reset_postdata();
 		
 		// Get map marker image dynmaically by searching for 'maps-marker'
 		$args = [
@@ -42,7 +63,7 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 		$header = $_header ? array_pop($_header) : null;
 		$map_marker = $header ? wp_get_attachment_url($header->ID) : '';
 
-		// map controls settings from plugin
+		// Map controls settings from plugin
 		$map_controls = [
 			'streetViewControl' => get_option('kn_controls')['streetViewControl'] ? true : false,
 			'fullscreenControl' => get_option('kn_controls')['fullscreenControl'] ? true : false,
@@ -52,6 +73,7 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 			'zoomControl' => get_option('kn_controls')['zoomControl'] ? true : false,
 		];
 
+		// Send the settings data
 		wp_localize_script('map', 'map_settings', [
 			'locations' => get_option('kn_locations'),
 			'markers' => get_option('kn_markers'),
@@ -60,6 +82,7 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 			'marker_image' => $map_marker,
 			'controls' => $map_controls,
 		]);
+		wp_localize_script('map', 'map_markers', $markers); // Send the markers data
 	}
 } // endif function_exists( 'understrap_scripts' ).
 add_action( 'wp_enqueue_scripts', 'understrap_scripts' );

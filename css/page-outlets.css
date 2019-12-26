@@ -99,8 +99,8 @@
 	margin-bottom: 10px;
 }
 
-.marker-content {
-	margin: 10px 0 5px 0;
+.marker-title, .marker-content {
+	margin: 10px;
 }
 
 @media (max-width: 1200px) {

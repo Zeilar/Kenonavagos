@@ -31,8 +31,7 @@ function map_init() {
 	}
 
 	const locations_list = map_settings.locations ? true : false;
-	const marker_path = map_settings.marker_image;
-	const markers = map_settings.markers ? map_settings.markers : {
+	const markers = map_markers ? map_markers : {
 		content: 'Medieinstitutet AB',
 		name: 'Drottninggatan 4',
 		lat: 55.607058,
@@ -58,11 +57,6 @@ function map_init() {
         styles: theme,
         zoom: zoom,
     };
-    const markerIcon = {
-        scaledSize: new google.maps.Size(25, 25),
-        size: new google.maps.Size(25, 25),
-        url: marker_path,
-    }
     const mapElement = document.getElementById('map');
     const map = new google.maps.Map(mapElement, mapOptions);
 	const infoWindow = new google.maps.InfoWindow();
@@ -75,17 +69,21 @@ function map_init() {
 			position: new google.maps.LatLng(markers[i].lat, markers[i].lng),
 			title: markers[i].name,
 			optimized: false,
-			icon: markerIcon,
+			icon: {
+				scaledSize: new google.maps.Size(25, 25),
+				size: new google.maps.Size(25, 25),
+				url: markers[i].icon,
+			},
 			map: map,
 		});
 		markersArray.push(marker);
 
 		// custom marker info window content
-		let markerContent = markers[i].content ? `<p class="marker-content">${markers[i].content}</p>` : '';
+		let markerContent = markers[i].content ? markers[i].content : '';
 		let markerHTML = `
 			<div class="marker-wrapper">
-				<h6 class="marker-header">${markers[i].name}</h6>
-				${markerContent}
+				<h6 class="marker-title">${markers[i].name}</h6>
+				<div class="marker-content">${markerContent}</div>
 			</div>
 		`;
 
@@ -117,11 +115,11 @@ function map_init() {
 		
 		// add marker event handlers and content
 		$('.outlet').each(function(i) {
-			let markerContent = markers[i].content ? `<p class="marker-content">${markers[i].content}</p>` : '';
+			let markerContent = markers[i].content ? markers[i].content : '';
 			let markerHTML = `
 				<div class="marker-wrapper">
-					<h6 class="marker-header">${markers[i].name}</h6>
-					${markerContent}
+					<h6 class="marker-title">${markers[i].name}</h6>
+					<div class="marker-content">${markerContent}</div>
 				</div>
 			`;
 			$(this).click(function() {
