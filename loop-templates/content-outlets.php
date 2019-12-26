@@ -1,17 +1,23 @@
 <div class="map-wrapper">
 
-	<div class="outlets-selection">
+	<?php if (get_option('kn_locations')): ?>
 
-		<div class="outlets-header-wrapper">
+		<div class="outlets-selection">
 
-			<h1 class="outlets-header">Hitta oss</h1>
+			<div class="outlets-header-wrapper">
 
-		</div><!-- outlets-header-wrapper -->
+				<h1 class="outlets-header">Hitta oss</h1>
 
-		<div class="outlets"><!-- outlet buttons --></div>
-	
-	</div><!-- outlets-selection -->
+			</div><!-- outlets-header-wrapper -->
 
-	<div id="map"><!-- Google Maps --></div>
+			<div class="outlets"><!-- outlet buttons --></div>
+		
+		</div><!-- outlets-selection -->
+
+	<?php endif; ?>
+
+	<div id="map" <?php if (get_option('kn_css') && get_option('kn_css') !== '') echo 'style="' . get_option('kn_css') . '"'; ?> >
+		<!-- Google Maps -->
+	</div>
 	
 </div><!-- map-wrapper -->

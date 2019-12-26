@@ -1,8 +1,8 @@
 // Philip
 
-google.maps.event.addDomListener(window, 'load', init); // run init() at window load event
+if ($('#map').length) google.maps.event.addDomListener(window, 'load', map_init); // only load map if #map exists 
 
-function init() {
+function map_init() {
 	// hard saved themes
 	let mapThemes = {
 		Default: null,
@@ -18,18 +18,27 @@ function init() {
 		if (theme === themes) {
 			theme = mapThemes[themes];
 			break;
-		} 
+		}
 	}
 
-	const marker_path = map_settings.marker_image; // path to marker image
-	const markers = map_settings.markers ? map_settings.markers : {
+	// if no match was found, it probably means it's the custom option, try parsing it...
+	if (typeof theme === 'string') {
+		try {
+			theme = JSON.parse(theme);
+		} catch (e) {
+			console.log(e + '\n\nIf you get this error you have likely insserted an invalid style array, check the input and try again');
+		}
+	}
+
+	const locations_list = map_settings.locations ? true : false;
+	const markers = map_markers ? map_markers : {
 		content: 'Medieinstitutet AB',
 		name: 'Drottninggatan 4',
 		lat: 55.607058,
 		lng: 13.020996,
 	};
-	const zoom = parseFloat(map_settings.zoom ? map_settings.zoom : 6); // zoom of the map
-	const controls = map_settings.controls ? map_settings.controls : { // enable/disable map controls
+	const zoom = parseFloat(map_settings.zoom ? map_settings.zoom : 6);
+	const controls = map_settings.controls ? map_settings.controls : {
 		fullscreenControl: false,
 		streetViewControl: false,
 		mapTypeControl: false,
@@ -48,11 +57,6 @@ function init() {
         styles: theme,
         zoom: zoom,
     };
-    const markerIcon = {
-        scaledSize: new google.maps.Size(25, 25),
-        size: new google.maps.Size(25, 25),
-        url: marker_path,
-    }
     const mapElement = document.getElementById('map');
     const map = new google.maps.Map(mapElement, mapOptions);
 	const infoWindow = new google.maps.InfoWindow();
@@ -65,17 +69,21 @@ function init() {
 			position: new google.maps.LatLng(markers[i].lat, markers[i].lng),
 			title: markers[i].name,
 			optimized: false,
-			icon: markerIcon,
+			icon: {
+				scaledSize: new google.maps.Size(25, 25),
+				size: new google.maps.Size(25, 25),
+				url: markers[i].icon,
+			},
 			map: map,
 		});
 		markersArray.push(marker);
 
 		// custom marker info window content
-		let markerContent = markers[i].content ? `<p class="marker-content">${markers[i].content}</p>` : '';
+		let markerContent = markers[i].content ? markers[i].content : '';
 		let markerHTML = `
 			<div class="marker-wrapper">
-				<h6 class="marker-header">${markers[i].name}</h6>
-				${markerContent}
+				<h6 class="marker-title">${markers[i].name}</h6>
+				<div class="marker-content">${markerContent}</div>
 			</div>
 		`;
 
@@ -100,33 +108,35 @@ function init() {
 			<hr class="outlet-hr" />
 		`;
 	}
-	// fill .outlets with the buttons
-	$('.outlets').html(outletsHTML);
-	
-	$('.outlet').each(function(i) {
-		let markerContent = markers[i].content ? `<p class="marker-content">${markers[i].content}</p>` : '';
-		let markerHTML = `
-			<div class="marker-wrapper">
-				<h6 class="marker-header">${markers[i].name}</h6>
-				${markerContent}
-			</div>
-		`;
-		$(this).click(function() {
-			infoWindow.setContent(markerHTML);
-			infoWindow.open(map, markersArray[i]);
-			map.setZoom(11);
-		});
-	});
 
-	//infoWindow.open(map, test[0]);
-
-	// change center to clicked location
-	$('.outlet').click(function() {
-		map.panTo({
-			lat: parseFloat($(this).attr('data-lat')),
-			lng: parseFloat($(this).attr('data-lng')),
+	if (locations_list) {
+		// fill .outlets with the buttons
+		$('.outlets').html(outletsHTML);
+		
+		// add marker event handlers and content
+		$('.outlet').each(function(i) {
+			let markerContent = markers[i].content ? markers[i].content : '';
+			let markerHTML = `
+				<div class="marker-wrapper">
+					<h6 class="marker-title">${markers[i].name}</h6>
+					<div class="marker-content">${markerContent}</div>
+				</div>
+			`;
+			$(this).click(function() {
+				infoWindow.setContent(markerHTML);
+				infoWindow.open(map, markersArray[i]);
+				map.setZoom(11);
+			});
 		});
-	});
+
+		// change center to clicked location
+		$('.outlet').click(function() {
+			map.panTo({
+				lat: parseFloat($(this).attr('data-lat')),
+				lng: parseFloat($(this).attr('data-lng')),
+			});
+		});
+	}
 
 	// if user accepts geolocation, center map on their position
 	if (navigator.geolocation) {
