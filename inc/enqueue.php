@@ -31,8 +31,27 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 			wp_enqueue_script('comment-reply');
 		}
 
+		// Get themes
+		$themes_query = new WP_Query([
+			'post_type' => 'map_theme',
+			'posts_per_page' => -1,
+			'order' => 'ASC',
+		]);
+
+		// Push selected theme into array
+		while ($themes_query->have_posts()) {
+			$themes_query->the_post();
+			if (get_option('kn_theme') === get_the_title()) {
+				$content = explode('</p>', str_replace(' ', '', explode('<p>', get_the_content()))[1])[0];
+				$theme = [
+					'name' => get_the_title(),
+					'style' => $content,
+				];
+			}
+		}
+
 		// Get markers
-		$results = new WP_Query([
+		$markers_query = new WP_Query([
 			'post_type' => 'kn_marker',
 			'posts_per_page' => -1,
 			'order' => 'ASC'
@@ -40,28 +59,18 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 
 		// Push markers into array
 		$markers = [];
-		while ($results->have_posts()) {
-			$results->the_post();
+		while ($markers_query->have_posts()) {
+			$markers_query->the_post();
 			array_push($markers, [
 				'content' => apply_filters('the_content', get_the_content()), // To remove stupid HTML comments by WordPress
 				'icon' => get_field('icon')['url'],
 				'lng' => get_field('longitude'),
 				'lat' => get_field('latitude'),
+				'size' => get_field('size'),
 				'name' => get_the_title(),
 			]);
 		}
 		wp_reset_postdata();
-		
-		// Get map marker image dynmaically by searching for 'maps-marker'
-		$args = [
-			'name' => sanitize_title('map-marker'),
-			'post_type' => 'attachment',
-			'post_status' => 'inherit',
-			'posts_per_page' => 1,
-		];
-		$_header = get_posts($args);
-		$header = $_header ? array_pop($_header) : null;
-		$map_marker = $header ? wp_get_attachment_url($header->ID) : '';
 
 		// Map controls settings from plugin
 		$map_controls = [
@@ -76,13 +85,11 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 		// Send the settings data
 		wp_localize_script('map', 'map_settings', [
 			'locations' => get_option('kn_locations'),
-			'markers' => get_option('kn_markers'),
-			'theme' => get_option('kn_theme'),
 			'zoom' => get_option('kn_zoom'),
-			'marker_image' => $map_marker,
 			'controls' => $map_controls,
 		]);
 		wp_localize_script('map', 'map_markers', $markers); // Send the markers data
+		wp_localize_script('map', 'map_theme', $theme); // Send the themes data
 	}
 } // endif function_exists( 'understrap_scripts' ).
 add_action( 'wp_enqueue_scripts', 'understrap_scripts' );
