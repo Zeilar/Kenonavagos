@@ -1,15 +1,38 @@
 /* Philip */
 
+.marker-header, .outlet, .outlets-header {
+	margin: 0;
+}
+
+.map-wrapper, .outlets-selection, .outlets {
+	display: flex;
+}
+
+.outlets-selection, .outlets {
+	flex-direction: column;
+}
+
+.outlet-text, .outlet-arrow {
+	align-self: center;
+}
+
+.gm-style-cc, .gm-svpc {
+	display: none;
+}
+
 .map-wrapper {
 	border: 2px solid black;
 	flex-direction: row;
-	display: flex;
+	margin: 10px 0;
 	height: 50vh;
 }
 
+#map {
+	height: 100%;
+	flex: 5;
+}
+
 .outlets-selection {
-	flex-direction: column;
-	display: flex;
 	flex: 2;
 }
 
@@ -38,22 +61,19 @@
 	width: fit-content;
 	font-size: 35px;
 	color: white;
-	margin: 0;
 	left: 50%;
 	top: 50%;
 }
 
 .outlets {
 	border-right: 2px solid black;
-	flex-direction: column;
 	overflow-y: auto;
-	display: flex;
+	flex: 1;
 }
 
 .outlet {
 	padding: 0;
 	border: 0;
-	margin: 0;
     justify-content: space-between;
     flex-direction: row;
 	background: none;
@@ -69,10 +89,6 @@
 	outline: 0;
 }
 
-.outlet-text, .outlet-arrow {
-	align-self: center;
-}
-
 .outlet-hr {
 	border-color: black;
 	margin: 0 5% 15px 5%;
@@ -83,29 +99,12 @@
 	margin-bottom: 10px;
 }
 
-#map {
-	height: 100%;
-	flex: 5;
-}
-
-.marker-header {
-	margin: 0;
-}
-
-.marker-content {
-	margin: 10px 0 5px 0;
-}
-
-.gm-style-cc {
-	display: none;
-}
-
-.gm-svpc {
-	display: none;
+.marker-title, .marker-content {
+	margin: 10px;
 }
 
 @media (max-width: 1200px) {
-	.outlets {
+	.outlets, .gmnoprint {
 		display: none;
 	}
 
@@ -119,10 +118,5 @@
 
 	.map-wrapper {
 		flex-direction: column;
-		height: 50vh;
-	}
-
-	.gmnoprint {
-		display: none;
 	}
 }
