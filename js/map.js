@@ -4,10 +4,12 @@ if ($('#map').length) google.maps.event.addDomListener(window, 'load', map_init)
 
 function map_init() {
 	let theme = '';
-	try {
-		theme = JSON.parse(map_theme.style);
-	} catch (e) {
-		console.log(e + '\n\n Invalid or empty style array, check the input and try again');
+	if (map_theme) {
+		try {
+			theme = JSON.parse(map_theme.style);
+		} catch (e) {
+			console.log(e + '\n\nInvalid theme style array, check the input and try again');
+		}
 	}
 
 	const locations_list = map_settings.locations || false;
