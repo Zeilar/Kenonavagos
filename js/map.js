@@ -3,42 +3,22 @@
 if ($('#map').length) google.maps.event.addDomListener(window, 'load', map_init); // only load map if #map exists 
 
 function map_init() {
-	// hard saved themes
-	let mapThemes = {
-		Default: null,
-		Dark: [{elementType:'geometry',stylers:[{color:'#242f3e'}]},{elementType:'labels.text.stroke',stylers:[{color:'#242f3e'}]},{elementType:'labels.text.fill',stylers:[{color:'#746855'}]},{featureType:'administrative.locality',elementType:'labels.text.fill',stylers:[{color:'#d59563'}]},{featureType:'poi',elementType:'labels.text.fill',stylers:[{color:'#d59563'}]},{featureType:'poi.park',elementType:'geometry',stylers:[{color:'#263c3f'}]},{featureType:'poi.park',elementType:'labels.text.fill',stylers:[{color:'#6b9a76'}]},{featureType:'road',elementType:'geometry',stylers:[{color:'#38414e'}]},{featureType:'road',elementType:'geometry.stroke',stylers:[{color:'#212a37'}]},{featureType:'road',elementType:'labels.text.fill',stylers:[{color:'#9ca5b3'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#746855'}]},{featureType:'road.highway',elementType:'geometry.stroke',stylers:[{color:'#1f2835'}]},{featureType:'road.highway',elementType:'labels.text.fill',stylers:[{color:'#f3d19c'}]},{featureType:'transit',elementType:'geometry',stylers:[{color:'#2f3948'}]},{featureType:'transit.station',elementType:'labels.text.fill',stylers:[{color:'#d59563'}]},{featureType:'water',elementType:'geometry',stylers:[{color:'#17263c'}]},{featureType:'water',elementType:'labels.text.fill',stylers:[{color:'#515c6d'}]},{featureType:'water',elementType:'labels.text.stroke',stylers:[{color:'#17263c'}]}],
-		MidnightCommander: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"color":"#000000"},{"lightness":13}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#144b53"},{"lightness":14},{"weight":1.4}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#08304b"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#0c4152"},{"lightness":5}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#0b434f"},{"lightness":25}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#0b3d51"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"}]},{"featureType":"transit","elementType":"all","stylers":[{"color":"#146474"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#021019"}]}],
-		ShadesOfGrey: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]}],
-		WY: [{"featureType":"all","elementType":"geometry.fill","stylers":[{"weight":"2.00"}]},{"featureType":"all","elementType":"geometry.stroke","stylers":[{"color":"#9c9c9c"}]},{"featureType":"all","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"landscape.man_made","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"color":"#eeeeee"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#7b7b7b"}]},{"featureType":"road","elementType":"labels.text.stroke","stylers":[{"color":"#ffffff"}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#c8d7d4"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#070707"}]},{"featureType":"water","elementType":"labels.text.stroke","stylers":[{"color":"#ffffff"}]}],
-	};
-
-	// search for selected theme in the saved themes object
-	let theme = map_settings.theme;
-	for (themes in mapThemes) {
-		if (theme === themes) {
-			theme = mapThemes[themes];
-			break;
-		}
+	let theme = '';
+	try {
+		theme = JSON.parse(map_theme.style);
+	} catch (e) {
+		console.log(e + '\n\n Invalid or empty style array, check the input and try again');
 	}
 
-	// if no match was found, it probably means it's the custom option, try parsing it...
-	if (typeof theme === 'string') {
-		try {
-			theme = JSON.parse(theme);
-		} catch (e) {
-			console.log(e + '\n\nIf you get this error you have likely insserted an invalid style array, check the input and try again');
-		}
-	}
-
-	const locations_list = map_settings.locations ? true : false;
-	const markers = map_markers ? map_markers : {
+	const locations_list = map_settings.locations || false;
+	const markers = map_markers || [{
 		content: 'Medieinstitutet AB',
 		name: 'Drottninggatan 4',
 		lat: 55.607058,
 		lng: 13.020996,
-	};
-	const zoom = parseFloat(map_settings.zoom ? map_settings.zoom : 6);
-	const controls = map_settings.controls ? map_settings.controls : {
+	}];
+	const zoom = parseFloat(map_settings.zoom != null ? map_settings.zoom : 6);
+	const controls = map_settings.controls || {
 		fullscreenControl: false,
 		streetViewControl: false,
 		mapTypeControl: false,
@@ -47,7 +27,7 @@ function map_init() {
 		zoomControl: true,
 	};
     const mapOptions = {
-        center: new google.maps.LatLng(55.607058, 13.020996), // default center point in case geolocation is turned off
+        center: new google.maps.LatLng(markers[0].lat, markers[0].lng), // default center point in case geolocation is turned off
 		fullscreenControl: controls.fullscreenControl,
 		streetViewControl: controls.streetViewControl,
 		mapTypeControl: controls.mapTypeControl,
@@ -68,10 +48,9 @@ function map_init() {
 		let marker = new google.maps.Marker({
 			position: new google.maps.LatLng(markers[i].lat, markers[i].lng),
 			title: markers[i].name,
-			optimized: false,
 			icon: {
-				scaledSize: new google.maps.Size(25, 25),
-				size: new google.maps.Size(25, 25),
+				scaledSize: new google.maps.Size(markers[i].size, markers[i].size),
+				size: new google.maps.Size(markers[i].size, markers[i].size),
 				url: markers[i].icon,
 			},
 			map: map,
@@ -113,7 +92,7 @@ function map_init() {
 		// fill .outlets with the buttons
 		$('.outlets').html(outletsHTML);
 		
-		// add marker event handlers and content
+		// add marker click handler and HTML content
 		$('.outlet').each(function(i) {
 			let markerContent = markers[i].content ? markers[i].content : '';
 			let markerHTML = `
