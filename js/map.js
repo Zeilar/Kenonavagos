@@ -3,22 +3,24 @@
 if ($('#map').length) google.maps.event.addDomListener(window, 'load', map_init); // only load map if #map exists 
 
 function map_init() {
-	let theme = map_theme.style;
-	try {
-		theme = JSON.parse(theme);
-	} catch (e) {
-		console.log(e + '\n\nIf you get this error you have likely insserted an invalid style array, check the input and try again');
+	let theme = '';
+	if (map_theme) {
+		try {
+			theme = JSON.parse(map_theme.style);
+		} catch (e) {
+			console.log(e + '\n\nInvalid theme style array, check the input and try again');
+		}
 	}
 
-	const locations_list = map_settings.locations ? true : false;
-	const markers = map_markers ? map_markers : {
+	const locations_list = map_settings.locations || false;
+	const markers = map_markers || [{
 		content: 'Medieinstitutet AB',
 		name: 'Drottninggatan 4',
 		lat: 55.607058,
 		lng: 13.020996,
-	};
-	const zoom = parseFloat(map_settings.zoom ? map_settings.zoom : 6);
-	const controls = map_settings.controls ? map_settings.controls : {
+	}];
+	const zoom = parseFloat(map_settings.zoom != null ? map_settings.zoom : 6);
+	const controls = map_settings.controls || {
 		fullscreenControl: false,
 		streetViewControl: false,
 		mapTypeControl: false,
@@ -27,7 +29,7 @@ function map_init() {
 		zoomControl: true,
 	};
     const mapOptions = {
-        center: new google.maps.LatLng(55.607058, 13.020996), // default center point in case geolocation is turned off
+        center: new google.maps.LatLng(markers[0].lat, markers[0].lng), // default center point in case geolocation is turned off
 		fullscreenControl: controls.fullscreenControl,
 		streetViewControl: controls.streetViewControl,
 		mapTypeControl: controls.mapTypeControl,
@@ -48,7 +50,6 @@ function map_init() {
 		let marker = new google.maps.Marker({
 			position: new google.maps.LatLng(markers[i].lat, markers[i].lng),
 			title: markers[i].name,
-			optimized: false,
 			icon: {
 				scaledSize: new google.maps.Size(markers[i].size, markers[i].size),
 				size: new google.maps.Size(markers[i].size, markers[i].size),
@@ -93,7 +94,7 @@ function map_init() {
 		// fill .outlets with the buttons
 		$('.outlets').html(outletsHTML);
 		
-		// add marker event handlers and content
+		// add marker click handler and HTML content
 		$('.outlet').each(function(i) {
 			let markerContent = markers[i].content ? markers[i].content : '';
 			let markerHTML = `
