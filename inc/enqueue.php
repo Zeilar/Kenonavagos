@@ -85,6 +85,7 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 
 		// Send the settings data
 		wp_localize_script('map', 'map_settings', [
+			'enableInfoWindow' => get_option('kn_infowindow'),
 			'locations' => get_option('kn_locations'),
 			'zoom' => get_option('kn_zoom'),
 			'controls' => $map_controls,

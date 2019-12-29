@@ -12,6 +12,7 @@ function map_init() {
 		}
 	}
 
+	const enableInfoWindow = map_settings.enableInfoWindow === '1' ? true : false;
 	const locations_list = map_settings.locations || false;
 	const markers = map_markers || [{
 		content: 'Medieinstitutet AB',
@@ -41,11 +42,12 @@ function map_init() {
     };
     const mapElement = document.getElementById('map');
     const map = new google.maps.Map(mapElement, mapOptions);
-	const infoWindow = new google.maps.InfoWindow();
+	let infoWindow;
+	if (enableInfoWindow) infoWindow = new google.maps.InfoWindow();
 
 	// add markers
-	let markersArray = [];
 	let outletsHTML = '';
+	let markersArray = [];
 	for (let i = 0; i < markers.length; i++) {
 		let marker = new google.maps.Marker({
 			position: new google.maps.LatLng(markers[i].lat, markers[i].lng),
@@ -71,8 +73,10 @@ function map_init() {
 		// add click event listener for every marker
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			return function() {
-				infoWindow.setContent(markerHTML);
-				infoWindow.open(map, marker);
+				if (enableInfoWindow) {
+					infoWindow.setContent(markerHTML);
+					infoWindow.open(map, marker);
+				}
 				map.panTo({
 					lat: parseFloat(markers[i].lat),
 					lng: parseFloat(markers[i].lng),
@@ -104,8 +108,10 @@ function map_init() {
 				</div>
 			`;
 			$(this).click(function() {
-				infoWindow.setContent(markerHTML);
-				infoWindow.open(map, markersArray[i]);
+				if (enableInfoWindow) {
+					infoWindow.setContent(markerHTML);
+					infoWindow.open(map, markersArray[i]);
+				}
 				map.setZoom(11);
 			});
 		});
