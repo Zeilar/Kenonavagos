@@ -86,7 +86,7 @@ function map_init() {
 
 		// create .outlets HTML
 		outletsHTML += `
-			<button class="outlet" data-lat="${markers[i].lat}" data-lng="${markers[i].lng}">
+			<button class="outlet" type="button" data-lat="${markers[i].lat}" data-lng="${markers[i].lng}">
 				<span class="outlet-text">${markers[i].name}</span>
 			</button>
 		`;
