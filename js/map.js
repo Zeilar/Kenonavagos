@@ -88,9 +88,7 @@ function map_init() {
 		outletsHTML += `
 			<button class="outlet" data-lat="${markers[i].lat}" data-lng="${markers[i].lng}">
 				<span class="outlet-text">${markers[i].name}</span>
-				<img class="outlet-arrow" src="https://i.imgur.com/hhZai5a.png" />
 			</button>
-			<hr class="outlet-hr" />
 		`;
 	}
 
