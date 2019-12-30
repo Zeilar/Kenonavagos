@@ -22,7 +22,7 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 		wp_enqueue_style('page-outlets', get_template_directory_uri() . '/css/outlets.css', [], null, 'all');
 
 		$js_version = $theme_version . '.' . filemtime( get_template_directory() . '/js/theme.min.js' );
-		wp_deregister_script('jquery'); // upgrade jQuery, a bit risky (Philip)
+		wp_deregister_script('jquery');
 		wp_enqueue_script('google-maps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBEuVhVxxRtJXEbALnA3BOgXwpps1it_ZI', [], null, true);
 		wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.4.1.js', [], '3.4.1', true);
 		wp_enqueue_script('map', get_template_directory_uri() . '/js/map.js', [], null, true);
@@ -47,14 +47,15 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 					'name' => get_the_title(),
 					'style' => $content,
 				];
+				break;
 			}
 		}
 
 		// Get markers
 		$markers_query = new WP_Query([
+			'order' => get_option('kn_locations'),
 			'post_type' => 'kn_marker',
 			'posts_per_page' => -1,
-			'order' => 'ASC'
 		]);
 
 		// Push markers into array
@@ -84,6 +85,7 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 
 		// Send the settings data
 		wp_localize_script('map', 'map_settings', [
+			'enableInfoWindow' => get_option('kn_infowindow'),
 			'locations' => get_option('kn_locations'),
 			'zoom' => get_option('kn_zoom'),
 			'controls' => $map_controls,

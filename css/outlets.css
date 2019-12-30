@@ -12,7 +12,17 @@
 	flex-direction: column;
 }
 
-.outlet-text, .outlet-arrow {
+.marker-title, .marker-content {
+	margin: 10px;
+}
+
+.outlet:hover, .outlet:focus {
+	background: black;
+	color: white;
+	outline: 0;
+}
+
+.outlet-text {
 	align-self: center;
 }
 
@@ -74,33 +84,13 @@
 .outlet {
 	padding: 0;
 	border: 0;
+	border-bottom: 2px solid black;
     justify-content: space-between;
     flex-direction: row;
+	user-select: none;
 	background: none;
-	padding: 5px 5%;
+	padding: 10px;
     display: flex;
-}
-
-.outlet:first-child {
-	margin-top: 10px;
-}
-
-.outlet:focus {
-	outline: 0;
-}
-
-.outlet-hr {
-	border-color: black;
-	margin: 0 5% 15px 5%;
-	width: 90%;
-}
-
-.outlet-hr:last-child {
-	margin-bottom: 10px;
-}
-
-.marker-title, .marker-content {
-	margin: 10px;
 }
 
 @media (max-width: 1200px) {
