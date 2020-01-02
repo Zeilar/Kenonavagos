@@ -30,7 +30,7 @@ function map_init() {
 		zoomControl: true,
 	};
     const mapOptions = {
-        center: new google.maps.LatLng(markers[0].lat, markers[0].lng), // default center point in case geolocation is turned off
+        center: new google.maps.LatLng(55.6068973, 13.0188182), // default center point in case geolocation is turned off
 		fullscreenControl: controls.fullscreenControl,
 		streetViewControl: controls.streetViewControl,
 		mapTypeControl: controls.mapTypeControl,
