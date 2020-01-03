@@ -16,9 +16,12 @@
 	margin: 10px;
 }
 
-.outlet:hover, .outlet:focus {
+.outlet:hover {
 	background: black;
 	color: white;
+}
+
+.outlet:focus {
 	outline: 0;
 }
 
@@ -35,6 +38,10 @@
 	flex-direction: row;
 	margin: 10px 0;
 	height: 50vh;
+}
+
+.marker-title {
+	font-size: 20px;
 }
 
 #map {
