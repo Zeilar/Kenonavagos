@@ -24,6 +24,6 @@ if ( ! function_exists( 'understrap_add_site_info' ) ) {
 	 * Add site info content.
 	 */
 	function understrap_add_site_info() {
-		// removed default site info (Philip)
+		// removed default site info
 	}
 }
