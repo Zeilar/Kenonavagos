@@ -102,14 +102,16 @@ function kn_map($echo = false) {
 	$markers = [];
 	while ($markers_query->have_posts()) {
 		$markers_query->the_post();
-		array_push($markers, [
-			'content' => apply_filters('the_content', get_the_content()), // To remove stupid HTML comments by WordPress
-			'icon' => get_field('icon')['url'],
-			'lng' => get_field('longitude'),
-			'lat' => get_field('latitude'),
-			'size' => get_field('size'),
-			'name' => get_the_title(),
-		]);
+		if (get_field('marker_enable')) {
+			array_push($markers, [
+				'content' => apply_filters('the_content', get_the_content()), // To remove stupid HTML comments by WordPress
+				'icon' => get_field('marker_icon')['url'],
+				'lng' => get_field('marker_longitude'),
+				'lat' => get_field('marker_latitude'),
+				'size' => get_field('marker_size'),
+				'name' => get_the_title(),
+			]);
+		}
 	}
 	wp_reset_postdata();
 

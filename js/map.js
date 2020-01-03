@@ -62,7 +62,7 @@ function map_init() {
 		markersArray.push(marker);
 
 		// custom marker info window content
-		let markerContent = markers[i].content ? markers[i].content : '';
+		let markerContent = markers[i].content || '';
 		let markerHTML = `
 			<div class="marker-wrapper">
 				<h6 class="marker-title">${markers[i].name}</h6>
@@ -99,7 +99,7 @@ function map_init() {
 		// add marker click handler and HTML content
 		let buttons = document.getElementsByClassName('outlet');
 		for (let i = 0; i < buttons.length; i++) {
-			let markerContent = markers[i].content ? markers[i].content : '';
+			let markerContent = markers[i].content || '';
 			let markerHTML = `
 				<div class="marker-wrapper">
 					<h6 class="marker-title">${markers[i].name}</h6>
