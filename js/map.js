@@ -1,15 +1,16 @@
-// Philip
-
-if ($('#map').length) google.maps.event.addDomListener(window, 'load', map_init); // only load map if #map exists 
+if (document.getElementById('map')) google.maps.event.addDomListener(window, 'load', map_init); // only load map if #map exists 
 
 function map_init() {
 	let theme = '';
-	try {
-		theme = JSON.parse(map_theme.style);
-	} catch (e) {
-		console.log(e + '\n\n Invalid or empty style array, check the input and try again');
+	if (map_theme) {
+		try {
+			theme = JSON.parse(map_theme.style);
+		} catch (e) {
+			console.log(e + '\n\nInvalid theme style array, check the input and try again');
+		}
 	}
 
+	const enableInfoWindow = map_settings.enableInfoWindow === '1' ? true : false;
 	const locations_list = map_settings.locations || false;
 	const markers = map_markers || [{
 		content: 'Medieinstitutet AB',
@@ -27,7 +28,7 @@ function map_init() {
 		zoomControl: true,
 	};
     const mapOptions = {
-        center: new google.maps.LatLng(markers[0].lat, markers[0].lng), // default center point in case geolocation is turned off
+        center: new google.maps.LatLng(55.6068973, 13.0188182), // default center point in case geolocation is turned off
 		fullscreenControl: controls.fullscreenControl,
 		streetViewControl: controls.streetViewControl,
 		mapTypeControl: controls.mapTypeControl,
@@ -39,11 +40,12 @@ function map_init() {
     };
     const mapElement = document.getElementById('map');
     const map = new google.maps.Map(mapElement, mapOptions);
-	const infoWindow = new google.maps.InfoWindow();
+	let infoWindow;
+	if (enableInfoWindow) infoWindow = new google.maps.InfoWindow();
 
 	// add markers
-	let markersArray = [];
 	let outletsHTML = '';
+	let markersArray = [];
 	for (let i = 0; i < markers.length; i++) {
 		let marker = new google.maps.Marker({
 			position: new google.maps.LatLng(markers[i].lat, markers[i].lng),
@@ -58,7 +60,7 @@ function map_init() {
 		markersArray.push(marker);
 
 		// custom marker info window content
-		let markerContent = markers[i].content ? markers[i].content : '';
+		let markerContent = markers[i].content || '';
 		let markerHTML = `
 			<div class="marker-wrapper">
 				<h6 class="marker-title">${markers[i].name}</h6>
@@ -69,8 +71,10 @@ function map_init() {
 		// add click event listener for every marker
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			return function() {
-				infoWindow.setContent(markerHTML);
-				infoWindow.open(map, marker);
+				if (enableInfoWindow) {
+					infoWindow.setContent(markerHTML);
+					infoWindow.open(map, marker);
+				}
 				map.panTo({
 					lat: parseFloat(markers[i].lat),
 					lng: parseFloat(markers[i].lng),
@@ -80,41 +84,42 @@ function map_init() {
 
 		// create .outlets HTML
 		outletsHTML += `
-			<button class="outlet" data-lat="${markers[i].lat}" data-lng="${markers[i].lng}">
+			<button class="outlet" type="button" data-lat="${markers[i].lat}" data-lng="${markers[i].lng}">
 				<span class="outlet-text">${markers[i].name}</span>
-				<img class="outlet-arrow" src="https://i.imgur.com/hhZai5a.png" />
 			</button>
-			<hr class="outlet-hr" />
 		`;
 	}
 
 	if (locations_list) {
 		// fill .outlets with the buttons
-		$('.outlets').html(outletsHTML);
+		document.querySelector('.outlets').innerHTML = outletsHTML;
 		
 		// add marker click handler and HTML content
-		$('.outlet').each(function(i) {
-			let markerContent = markers[i].content ? markers[i].content : '';
+		let buttons = document.getElementsByClassName('outlet');
+		for (let i = 0; i < buttons.length; i++) {
+			let markerContent = markers[i].content || '';
 			let markerHTML = `
 				<div class="marker-wrapper">
 					<h6 class="marker-title">${markers[i].name}</h6>
 					<div class="marker-content">${markerContent}</div>
 				</div>
 			`;
-			$(this).click(function() {
-				infoWindow.setContent(markerHTML);
-				infoWindow.open(map, markersArray[i]);
+			buttons[i].addEventListener('click', function() {
+				if (enableInfoWindow) {
+					infoWindow.setContent(markerHTML);
+					infoWindow.open(map, markersArray[i]);
+				}
 				map.setZoom(11);
 			});
-		});
 
-		// change center to clicked location
-		$('.outlet').click(function() {
-			map.panTo({
-				lat: parseFloat($(this).attr('data-lat')),
-				lng: parseFloat($(this).attr('data-lng')),
+			// change center to clicked location
+			buttons[i].addEventListener('click', function() {
+				map.panTo({
+					lat: parseFloat(buttons[i].getAttribute('data-lat')),
+					lng: parseFloat(buttons[i].getAttribute('data-lng')),
+				});
 			});
-		});
+		}
 	}
 
 	// if user accepts geolocation, center map on their position
