@@ -64,6 +64,7 @@ foreach ( $understrap_includes as $file ) {
  * 
  * @param boolean $echo - whether to echo the map or just prepare it
  */
+
 function kn_map($echo = false) {
 	wp_deregister_script('jquery');
 	wp_enqueue_style('page-outlets', get_template_directory_uri() . '/css/outlets.css', [], null, 'all');
