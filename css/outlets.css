@@ -1,13 +1,55 @@
 /* Philip */
 
-.map-wrapper {
-	flex-direction: row;
+.marker-header, .outlet, .outlets-header {
+	margin: 0;
+}
+
+.map-wrapper, .outlets-selection, .outlets {
 	display: flex;
+}
+
+.outlets-selection, .outlets {
+	flex-direction: column;
+}
+
+.marker-title, .marker-content {
+	margin: 10px;
+}
+
+.outlet:hover {
+	background: black;
+	color: white;
+}
+
+.outlet:focus {
+	outline: 0;
+}
+
+.outlet-text {
+	align-self: center;
+}
+
+.gm-style-cc {
+	display: none;
+}
+
+.map-wrapper {
+	border: 2px solid black;
+	flex-direction: row;
+	margin: 10px 0;
 	height: 50vh;
 }
 
+.marker-title {
+	font-size: 20px;
+}
+
+#map {
+	height: 100%;
+	flex: 5;
+}
+
 .outlets-selection {
-	border-bottom: 1px solid black;
 	flex: 2;
 }
 
@@ -36,75 +78,30 @@
 	width: fit-content;
 	font-size: 35px;
 	color: white;
-	margin: 0;
 	left: 50%;
 	top: 50%;
 }
 
 .outlets {
-	border-left: 1px solid black;
-	flex-direction: column;
+	border-right: 2px solid black;
 	overflow-y: auto;
-	display: flex;
-	height: 43vh;
+	flex: 1;
 }
 
 .outlet {
 	padding: 0;
 	border: 0;
-	margin: 0;
+	border-bottom: 2px solid black;
     justify-content: space-between;
     flex-direction: row;
+	user-select: none;
 	background: none;
-	padding: 5px 5%;
+	padding: 10px;
     display: flex;
 }
 
-.outlet:first-child {
-	margin-top: 10px;
-}
-
-.outlet:focus {
-	outline: 0;
-}
-
-.outlet-text, .outlet-arrow {
-	align-self: center;
-}
-
-.outlet-hr {
-	border-color: black;
-	margin: 0 5% 15px 5%;
-	width: 90%;
-}
-
-.outlet-hr:last-child {
-	margin-bottom: 10px;
-}
-
-#map {
-	height: 100%;
-	flex: 5;
-}
-
-.marker-header {
-	margin: 0;
-}
-
-.marker-content {
-	margin: 10px 0 5px 0;
-}
-
-.gm-style-cc {
-	display: none;
-}
-
-.gm-svpc {
-	display: none;
-}
-
 @media (max-width: 1200px) {
-	.outlets {
+	.outlets, .gmnoprint {
 		display: none;
 	}
 
@@ -118,11 +115,5 @@
 
 	.map-wrapper {
 		flex-direction: column;
-		height: 50vh;
-		border: 0;
-	}
-
-	.gmnoprint {
-		display: none;
 	}
 }
