@@ -1,6 +1,6 @@
 <?php
 /**
- * Custom filters (Philip)
+ * Custom filters
  */
 
 add_filter('the_content', function($content) {
