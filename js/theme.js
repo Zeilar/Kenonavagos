@@ -4393,9 +4393,9 @@
           },
           preventOverflow: {
             boundariesElement: this._config.boundary
-          } // Disable Popper.js if we have a static display
+          }
+        } // Disable Popper.js if we have a static display
 
-        }
       };
 
       if (this._config.display === 'static') {
