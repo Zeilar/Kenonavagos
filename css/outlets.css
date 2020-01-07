@@ -1,0 +1,117 @@
+.marker-header, .outlet, .outlets-header {
+	margin: 0;
+}
+
+.map-wrapper, .outlets-selection, .outlets {
+	display: flex;
+}
+
+.outlets-selection, .outlets {
+	flex-direction: column;
+}
+
+.marker-title, .marker-content {
+	margin: 10px;
+}
+
+.outlet:hover {
+	background: black;
+	color: white;
+}
+
+.outlet:focus {
+	outline: 0;
+}
+
+.outlet-text {
+	align-self: center;
+}
+
+.gm-style-cc {
+	display: none;
+}
+
+.map-wrapper {
+	border: 2px solid black;
+	flex-direction: row;
+	margin: 10px 0;
+	height: 50vh;
+}
+
+.marker-title {
+	font-size: 20px;
+}
+
+#map {
+	height: 100%;
+	flex: 5;
+}
+
+.outlets-selection {
+	flex: 2;
+}
+
+.outlets::-webkit-scrollbar {
+	width: 15px;
+}
+
+.outlets::-webkit-scrollbar-track {
+	background: none;
+}
+
+.outlets::-webkit-scrollbar-thumb {
+	background: rgb(75, 75, 75);
+}
+
+.outlets-header-wrapper {
+	background: black;
+	position: relative;
+	height: 7vh;
+}
+
+.outlets-header {
+	transform: translate(-50%, -50%);
+	text-align: center;
+	position: absolute;
+	width: fit-content;
+	font-size: 35px;
+	color: white;
+	left: 50%;
+	top: 50%;
+}
+
+.outlets {
+	border-right: 2px solid black;
+	overflow-y: auto;
+	flex: 1;
+}
+
+.outlet {
+	padding: 0;
+	border: 0;
+	border-bottom: 2px solid black;
+    justify-content: space-between;
+    flex-direction: row;
+	user-select: none;
+	background: none;
+	padding: 10px;
+    display: flex;
+}
+
+@media (max-width: 1200px) {
+	.outlets, .gmnoprint {
+		display: none;
+	}
+
+	.outlets-header {
+		font-size: 25px;
+	}
+
+	.outlets-selection {
+		flex: none;
+	}
+
+	.map-wrapper {
+		flex-direction: column;
+	}
+}
