@@ -138,7 +138,7 @@ $loop = new WP_Query( array(
     'post_type' => 'product',
     'post_status' => 'publish',
     'posts_per_page' => 30,
-    'product_cat' => 'kid,',
+    'product_cat' => 'kids,',
 	'orderby' => 'rand'
 	
 ) );
@@ -176,9 +176,10 @@ wp_reset_postdata();
 			<main class="site-main" id="main">
 
 				<?php while ( have_posts() ) : the_post(); ?>
-				
 
-					<?php get_template_part( 'loop-templates/content', 'frontpage' ); ?>
+          <?php get_template_part( 'loop-templates/content', 'frontpage' ); ?>
+          
+
 
 				<?php endwhile; // end of the loop. ?>
 
@@ -189,6 +190,5 @@ wp_reset_postdata();
 	</div><!-- #content -->
 
 </div><!-- #page-wrapper -->
-<!-- end page content -->
 
 <?php get_footer(); ?>

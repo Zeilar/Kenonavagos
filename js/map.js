@@ -1,5 +1,3 @@
-// Philip
-
 if (document.getElementById('map')) google.maps.event.addDomListener(window, 'load', map_init); // only load map if #map exists 
 
 function map_init() {

@@ -12694,7 +12694,6 @@ figure.woocommerce-product-gallery__wrapper {
      -moz-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
-  background: red;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -12703,9 +12702,9 @@ figure.woocommerce-product-gallery__wrapper {
   margin-left: auto;
   margin-right: auto;
   display: flex;
+  text-transform: uppercase;
   list-style: none; }
   .navbar-nav .nav-link {
-    background: green;
     display: block;
     margin-left: auto;
     margin-right: auto; }

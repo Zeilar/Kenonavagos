@@ -11,7 +11,7 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 	 * Load theme's JavaScript and CSS sources.
 	 */
 	function understrap_scripts() {
-		// Philip
+		// Initalize the map
 		kn_map();
 
 		// Get the theme data.

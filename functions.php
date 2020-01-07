@@ -29,7 +29,7 @@ $understrap_includes = array(
 );
 
 /**
- * Register Custom Navigation Walker (Philip)
+ * Register Custom Navigation Walker
  */
 function register_navwalker() {
 	require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
@@ -65,8 +65,8 @@ foreach ( $understrap_includes as $file ) {
  * @param boolean $echo - whether to echo the map or just prepare it
  */
 function kn_map($echo = false) {
-	wp_enqueue_style('page-outlets', get_template_directory_uri() . '/css/outlets.css', [], null, 'all');
 	wp_deregister_script('jquery');
+	wp_enqueue_style('page-outlets', get_template_directory_uri() . '/css/outlets.css', [], null, 'all');
 	wp_enqueue_script('google-maps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBEuVhVxxRtJXEbALnA3BOgXwpps1it_ZI', [], null, true);
 	wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.4.1.js', [], '3.4.1', true);
 	wp_enqueue_script('map', get_template_directory_uri() . '/js/map.js', [], null, true);
