@@ -53,17 +53,18 @@
   // Custom navbar navigation (doesn't require `.nav`, but does make use of `.nav-link`).
   .navbar-nav {
     justify-content: space-evenly;
-    background: red;
-    display: flex;
+    // background: white;
+      display: flex;
       margin-left: auto;
       margin-right: auto;
       display: flex;
+      text-transform: uppercase;
     //flex-direction: column; // cannot use `inherit` to get the `.navbar`s value
    // justify-content: space-evenly;
   //margin-bottom: 0;
     list-style: none;
     .nav-link {
-      background:green;
+      // background:white;
       display: block;
       margin-left: auto;
       margin-right: auto;

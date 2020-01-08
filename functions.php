@@ -91,6 +91,15 @@ function kn_map($echo = false) {
 		}
 	}
 
+
+	// If no matches were found, it's probably the Custom option, send it and try it
+	if (!$theme) {
+		$theme = [
+			'style' => get_option('kn_theme'),
+			'name' => 'Custom',
+		];
+	}
+
 	// Get markers
 	$markers_query = new WP_Query([
 		'order' => get_option('kn_locations'),
