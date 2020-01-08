@@ -84,7 +84,7 @@ function kn_map($echo = false) {
 		$themes_query->the_post();
 		if (get_option('kn_theme') === get_the_title()) {
 			$content = explode('</p>', str_replace(' ', '', explode('<p>', get_the_content()))[1])[0];
-			//strip_tags($content, ['<!-- -->', '<p>']);
+			//strip_tags($content, ['<p>']);
 			$theme = [
 				'name' => get_the_title(),
 				'style' => $content,
@@ -98,7 +98,6 @@ function kn_map($echo = false) {
 	if (!$theme) {
 		$theme = [
 			'style' => get_option('kn_theme'),
-			'name' => 'Custom',
 		];
 	}
 
