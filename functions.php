@@ -83,8 +83,7 @@ function kn_map($echo = false) {
 	while ($themes_query->have_posts()) {
 		$themes_query->the_post();
 		if (get_option('kn_theme') === get_the_title()) {
-			$content = explode('</p>', str_replace(' ', '', explode('<p>', get_the_content()))[1])[0];
-			//strip_tags($content, ['<p>']);
+			$content = strip_tags(get_the_content());
 			$theme = [
 				'name' => get_the_title(),
 				'style' => $content,
