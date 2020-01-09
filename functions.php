@@ -62,7 +62,7 @@ foreach ( $understrap_includes as $file ) {
 /**
  * Set up map
  * 
- * @param boolean $echo - whether to echo the map or just prepare it
+ * @param boolean $echo whether to echo the map or just initialize it
  */
 
 function kn_map($echo = false) {
