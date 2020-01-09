@@ -110,14 +110,14 @@ function map_init() {
 					infoWindow.open(map, markersArray[i]);
 				}
 				map.setZoom(11);
-			});
-
-			// change center to clicked location
-			buttons[i].addEventListener('click', function() {
 				map.panTo({
 					lat: parseFloat(buttons[i].getAttribute('data-lat')),
 					lng: parseFloat(buttons[i].getAttribute('data-lng')),
 				});
+				for (let i = 0; i < buttons.length; i++) {
+					buttons[i].removeAttribute('style');
+				}
+				this.setAttribute('style', 'box-shadow: inset 0 0 15px 0px rgba(0, 0, 0, 0.5);');
 			});
 		}
 	}
