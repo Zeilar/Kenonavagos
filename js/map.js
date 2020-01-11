@@ -9,7 +9,6 @@ function map_init() {
 			console.log(e + '\n\nInvalid theme style array, check the input and try again');
 		}
 	}
-
 	const enableInfoWindow = map_settings.enableInfoWindow === '1' ? true : false;
 	const locations_list = map_settings.locations || false;
 	const markers = map_markers || [{
@@ -114,10 +113,6 @@ function map_init() {
 					lat: parseFloat(buttons[i].getAttribute('data-lat')),
 					lng: parseFloat(buttons[i].getAttribute('data-lng')),
 				});
-				for (let i = 0; i < buttons.length; i++) {
-					buttons[i].removeAttribute('style');
-				}
-				this.setAttribute('style', 'box-shadow: inset 0 0 15px 0px rgba(0, 0, 0, 0.5);');
 			});
 		}
 	}

@@ -15,8 +15,13 @@
 }
 
 .outlet:hover {
-	background: black;
-	color: white;
+	transition: all 0.1s linear;
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	-ms-transition: all 0.1s linear;
+	-o-transition: all 0.1s linear;
+	color: rgb(0, 185, 235);
+	background: rgb(75, 75, 75);
 }
 
 .outlet:focus {
@@ -32,6 +37,7 @@
 }
 
 .map-wrapper {
+	background: rgb(60, 60, 60);
 	border: 2px solid black;
 	flex-direction: row;
 	margin: 10px 0;
@@ -43,6 +49,7 @@
 }
 
 #map {
+	border-left: 2px solid black;
 	height: 100%;
 	flex: 5;
 }
@@ -60,11 +67,10 @@
 }
 
 .outlets::-webkit-scrollbar-thumb {
-	background: rgb(75, 75, 75);
+	background: rgb(85, 85, 85);
 }
 
 .outlets-header-wrapper {
-	background: black;
 	position: relative;
 	height: 7vh;
 }
@@ -74,14 +80,14 @@
 	text-align: center;
 	position: absolute;
 	width: fit-content;
-	font-size: 35px;
+	font-size: 25px;
 	color: white;
 	left: 50%;
 	top: 50%;
 }
 
 .outlets {
-	border-right: 2px solid black;
+	border-top: 2px solid black;
 	overflow-y: auto;
 	flex: 1;
 }
@@ -89,13 +95,18 @@
 .outlet {
 	padding: 0;
 	border: 0;
-	border-bottom: 2px solid black;
-    justify-content: space-between;
-    flex-direction: row;
+	transition: background 0.1s linear, color 0.1s linear;
+	-webkit-transition: background 0.1s linear, color 0.1s linear;
+	-moz-transition: background 0.1s linear, color 0.1s linear;
+	-ms-transition: background 0.1s linear, color 0.1s linear;
+	-o-transition: background 0.1s linear, color 0.1s linear;
+	justify-content: space-between;
+	flex-direction: row;
 	user-select: none;
 	background: none;
+	color: white;
 	padding: 10px;
-    display: flex;
+	display: flex;
 }
 
 @media (max-width: 1200px) {
