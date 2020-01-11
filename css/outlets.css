@@ -37,6 +37,7 @@
 }
 
 .map-wrapper {
+	box-shadow: 0 0 15px 0 rgba(0, 0, 0, 1);
 	background: rgb(60, 60, 60);
 	border: 2px solid black;
 	flex-direction: row;
