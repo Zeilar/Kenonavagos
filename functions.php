@@ -92,7 +92,6 @@ function kn_map($echo = false) {
 		}
 	}
 
-
 	// If no matches were found, it's probably the Custom option, send it and try it
 	if (!$theme) {
 		$theme = [
