@@ -62,8 +62,9 @@ foreach ( $understrap_includes as $file ) {
 /**
  * Set up map
  * 
- * @param boolean $echo - whether to echo the map or just prepare it
+ * @param boolean $echo whether to echo the map or just initialize it
  */
+
 function kn_map($echo = false) {
 	wp_deregister_script('jquery');
 	wp_enqueue_style('page-outlets', get_template_directory_uri() . '/css/outlets.css', [], null, 'all');
@@ -82,13 +83,20 @@ function kn_map($echo = false) {
 	while ($themes_query->have_posts()) {
 		$themes_query->the_post();
 		if (get_option('kn_theme') === get_the_title()) {
-			$content = explode('</p>', str_replace(' ', '', explode('<p>', get_the_content()))[1])[0];
+			$content = strip_tags(get_the_content());
 			$theme = [
 				'name' => get_the_title(),
 				'style' => $content,
 			];
 			break;
 		}
+	}
+
+	// If no matches were found, it's probably the Custom option, send it and try it
+	if (!$theme) {
+		$theme = [
+			'style' => get_option('kn_theme'),
+		];
 	}
 
 	// Get markers
