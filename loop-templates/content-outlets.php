@@ -6,7 +6,7 @@
 
 			<div class="outlets-header-wrapper">
 
-				<h1 class="outlets-header">Hitta oss</h1>
+				<h1 class="outlets-header">HITTA OSS</h1>
 
 			</div><!-- outlets-header-wrapper -->
 

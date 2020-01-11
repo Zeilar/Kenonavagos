@@ -9,7 +9,6 @@ function map_init() {
 			console.log(e + '\n\nInvalid theme style array, check the input and try again');
 		}
 	}
-
 	const enableInfoWindow = map_settings.enableInfoWindow === '1' ? true : false;
 	const locations_list = map_settings.locations || false;
 	const markers = map_markers || [{
@@ -110,10 +109,6 @@ function map_init() {
 					infoWindow.open(map, markersArray[i]);
 				}
 				map.setZoom(11);
-			});
-
-			// change center to clicked location
-			buttons[i].addEventListener('click', function() {
 				map.panTo({
 					lat: parseFloat(buttons[i].getAttribute('data-lat')),
 					lng: parseFloat(buttons[i].getAttribute('data-lng')),
